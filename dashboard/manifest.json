@@ -1,0 +1,14 @@
+{
+  "name": "nostromo",
+  "label": "Nostromo MU/THUR 1800",
+  "description": "Weyland-Yutani Nostromo ship computer interface. Distributed consciousness across the swarm.",
+  "icon": "Satellite",
+  "version": "1.0.0-hackathon-2026-04-25",
+  "tab": {
+    "path": "/nostromo",
+    "position": "after:skills",
+    "label": "Nostromo"
+  },
+  "entry": "dist/index.js",
+  "api": "plugin_api.py"
+}
