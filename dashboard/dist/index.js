@@ -65,7 +65,7 @@ function BootSequence({ onComplete }) {
   
   return React.createElement("div", {
     className: "h-full w-full bg-black p-8 font-mono text-sm",
-    style: { color: PALETTE.amber, textShadow: `0 0 10px ${PALETTE.amber}` }
+    className="phosphor" style={{ color: PALETTE.amber, textShadow: `0 0 10px ${PALETTE.amber}` }
   },
     React.createElement("pre", null, text),
     React.createElement("div", {
@@ -266,7 +266,7 @@ function NostromoDashboard() {
           React.createElement("div", null,
             React.createElement("h1", {
               className: "text-xl font-black tracking-wider",
-              style: { color: PALETTE.amber, textShadow: `0 0 20px ${PALETTE.amber}` }
+              className="phosphor" style={{ color: PALETTE.amber, textShadow: `0 0 20px ${PALETTE.amber}` }
             }, "NOSTROMO / MU·TH·UR 1800"),
             React.createElement("p", { className: "text-xs opacity-60 tracking-widest" }, "Weyland-Yutani / Commercial Tug / LV-426")
           )
