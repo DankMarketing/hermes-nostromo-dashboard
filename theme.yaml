@@ -1,0 +1,61 @@
+name: nostromo
+label: Nostromo MU/THUR 1800
+description: Weyland-Yutani industrial terminal aesthetic. Amber CRT, scanlines, ship computer.
+palette:
+  background: "#000000"
+  midground: "#ffb000"
+  foreground: "#ffffff"
+layoutVariant: cockpit
+assets:
+  wy-logo: "/api/plugins/nostromo/static/wy-logo.svg"
+componentStyles:
+  card:
+    borderWidth: "1px"
+    borderColor: "rgba(255, 176, 0, 0.3)"
+    backgroundColor: "rgba(0, 0, 0, 0.4)"
+    borderRadius: "4px"
+  button:
+    borderWidth: "1px"
+    borderColor: "var(--theme-midground)"
+    color: "var(--theme-midground)"
+    backgroundColor: "transparent"
+    hoverBackgroundColor: "rgba(255, 176, 0, 0.1)"
+  input:
+    borderColor: "rgba(255, 176, 0, 0.5)"
+    backgroundColor: "rgba(0, 0, 0, 0.5)"
+    color: "var(--theme-midground)"
+customCSS: |
+  :root {
+    --font-mono: "Courier New", "Lucida Console", monospace;
+    --font-sans: system-ui, -apple-system, sans-serif;
+  }
+  
+  body {
+    background-color: #000 !important;
+    font-family: var(--font-mono) !important;
+  }
+  
+  .font-mono { font-family: var(--font-mono) !important; }
+  
+  /* CRT flicker animation */
+  @keyframes crt-flicker {
+    0% { opacity: 0.95; }
+    5% { opacity: 0.85; }
+    10% { opacity: 0.95; }
+    15% { opacity: 1; }
+    100% { opacity: 1; }
+  }
+  
+  .crt-active {
+    animation: crt-flicker 0.15s infinite;
+  }
+  
+  /* Amber glow on headers */
+  h1, h2, h3 {
+    text-shadow: 0 0 20px var(--theme-midground) !important;
+  }
+  
+  /* Scrollbar styling */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #111; }
+  ::-webkit-scrollbar-thumb { background: var(--theme-midground); border-radius: 3px; }
