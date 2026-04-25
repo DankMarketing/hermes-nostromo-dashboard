@@ -9,6 +9,8 @@ venv/
 build/
 develop-eggs/
 !dashboard/dist/index.js
+!dashboard/dist/
+!dashboard/dist/index.js
 dist/
 downloads/
 eggs/
