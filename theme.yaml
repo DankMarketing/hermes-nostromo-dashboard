@@ -1,61 +1,144 @@
 name: nostromo
-label: Nostromo MU/THUR 1800
-description: Weyland-Yutani industrial terminal aesthetic. Amber CRT, scanlines, ship computer.
+label: Nostromo MU/THUR 6000
+description: Weyland-Yutani USCSS Nostromo ship computer interface. CRT phosphor green on obsidian.
 palette:
   background: "#000000"
-  midground: "#ffb000"
-  foreground: "#ffffff"
+  midground: "#00FF00"
+  foreground: "#e0e0e0"
 layoutVariant: cockpit
-assets:
-  wy-logo: "/api/plugins/nostromo/static/wy-logo.svg"
+assets: {}
 componentStyles:
   card:
-    borderWidth: "1px"
-    borderColor: "rgba(255, 176, 0, 0.3)"
-    backgroundColor: "rgba(0, 0, 0, 0.4)"
-    borderRadius: "4px"
+    borderWidth: "2px"
+    borderColor: "#4A6C82"
+    backgroundColor: "rgba(0, 0, 0, 0.6)"
+    borderRadius: "0px"
   button:
-    borderWidth: "1px"
+    borderWidth: "2px"
     borderColor: "var(--theme-midground)"
     color: "var(--theme-midground)"
     backgroundColor: "transparent"
-    hoverBackgroundColor: "rgba(255, 176, 0, 0.1)"
+    fontFamily: "'VT323', monospace"
+    textTransform: "uppercase"
+    letterSpacing: "0.1em"
+    fontWeight: 400
+    hoverBackgroundColor: "rgba(0, 255, 0, 0.1)"
   input:
-    borderColor: "rgba(255, 176, 0, 0.5)"
-    backgroundColor: "rgba(0, 0, 0, 0.5)"
+    borderWidth: "2px"
+    borderColor: "var(--theme-midground)"
+    backgroundColor: "rgba(0, 0, 0, 0.8)"
     color: "var(--theme-midground)"
+    fontFamily: "'VT323', monospace"
+    fontSize: "1.1rem"
+  badgetag:
+    borderWidth: "1px"
+    borderColor: "var(--theme-midground)"
+    color: "var(--theme-midground)"
+    backgroundColor: "rgba(0, 255, 0, 0.15)"
 customCSS: |
+  @import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap');
+  
   :root {
-    --font-mono: "Courier New", "Lucida Console", monospace;
-    --font-sans: system-ui, -apple-system, sans-serif;
+    --font-mono: 'VT323', 'Share Tech Mono', monospace;
+    --phosphor-glow: 0 0 8px rgba(0, 255, 0, 0.7);
   }
   
   body {
     background-color: #000 !important;
     font-family: var(--font-mono) !important;
+    color: var(--theme-midground);
   }
   
-  .font-mono { font-family: var(--font-mono) !important; }
+  /* Phosphor text glow */
+  h1, h2, h3, .phosphor {
+    text-shadow: var(--phosphor-glow);
+  }
   
-  /* CRT flicker animation */
-  @keyframes crt-flicker {
-    0% { opacity: 0.95; }
-    5% { opacity: 0.85; }
-    10% { opacity: 0.95; }
-    15% { opacity: 1; }
+  /* Blocky dividers */
+  hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      var(--theme-midground) 20%, 
+      var(--theme-midground) 80%, 
+      transparent 100%);
+    margin: 1.5rem 0;
+  }
+  
+  /* Bracket labels */
+  .panel-header::before {
+    content: "[ ";
+    opacity: 0.7;
+  }
+  .panel-header::after {
+    content: " ]";
+    opacity: 0.7;
+  }
+  
+  /* Scanline effect */
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15),
+      rgba(0, 0, 0, 0.15) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+  
+  /* Flicker animation */
+  @keyframes phosphor-flicker {
+    0% { opacity: 1; }
+    5% { opacity: 0.95; }
+    10% { opacity: 1; }
+    15% { opacity: 0.9; }
+    50% { opacity: 1; }
+    55% { opacity: 0.95; }
+    60% { opacity: 1; }
     100% { opacity: 1; }
   }
   
-  .crt-active {
-    animation: crt-flicker 0.15s infinite;
+  .phosphor-active {
+    animation: phosphor-flicker 2s infinite;
   }
   
-  /* Amber glow on headers */
-  h1, h2, h3 {
-    text-shadow: 0 0 20px var(--theme-midground) !important;
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #000; border: 1px solid #4A6C82; }
+  ::-webkit-scrollbar-thumb { 
+    background: var(--theme-midground); 
+    border: 1px solid #000;
+    box-shadow: var(--phosphor-glow);
   }
   
-  /* Scrollbar styling */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: #111; }
-  ::-webkit-scrollbar-thumb { background: var(--theme-midground); border-radius: 3px; }
+  /* Card hover effect */
+  .card, [class*="Card"] {
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .card:hover, [class*="Card"]:hover {
+    border-color: var(--theme-midground) !important;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3) !important;
+  }
+  
+  /* Badge styling */
+  .badge {
+    font-family: var(--font-mono) !important;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  
+  /* Input styling */
+  input, textarea, select {
+    font-family: var(--font-mono) !important;
+  }
+  
+  /* Monospace everywhere */
+  .font-mono, code, pre, samp, kbd {
+    font-family: var(--font-mono) !important;
+  }
